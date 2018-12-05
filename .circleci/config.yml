@@ -1,12 +1,18 @@
-version: 2
+version: 2.0
+
 jobs:
-  build:
+  deploy:
+    machine:
+        enabled: true
+    working_directory: /home/tricon/circlecli/circlecidemo
     steps:
-      - run: 
-          name: deployment
-          command: ./deploy.sh
+      - run:
+          name: Deployment Master to Heroku
+          command: 
+            ./deploy.sh
+
 workflows:
   version: 2
-  build_and_test:
+  build-and-deploy:
     jobs:
-      - build
+      - deploy
