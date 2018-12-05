@@ -1,9 +1,12 @@
-deployment:
-  production:
-    branch: master
-    commands:
-      - ./deploy.sh
-
-test:
-  override:
-    - echo 'no tests!! thanks '
+version: 2
+jobs:
+  build:
+    steps:
+      - run: 
+          name: deployment
+          command: ./deploy.sh
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
