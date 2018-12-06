@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run remove-build && npm run tslint && npm run build-ts",
+    "build": "npm run tslint && npm run build-ts",
     "start": "cross-env NODE_ENV=local PORT=8000 node dist//server.js",
     "build-ts": "tsc",
-    "tslint": "tslint -c tslint.json -p tsconfig.json"
+    "remove-build": "ts-node remove-build.ts",
+    "tslint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json"
   },
   "dependencies": {
     "@types/async": "^2.0.49",
