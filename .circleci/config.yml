@@ -10,11 +10,8 @@ jobs: # a collection of steps
           command: pwd
       - run:
           name: cloning repo
-          command: git clone https://github.com/ravi-94/circlecidemo.git
-      - run:
-          name: navigating to directory
-          command: cd circlecidemo
-      - run:
+          command: cd ../ && git clone https://github.com/ravi-94/circlecidemo.git
+     - run:
           name: checkout master
           command: git checkout master
       - run:
