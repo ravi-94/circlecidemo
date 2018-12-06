@@ -1,7 +1,7 @@
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build_and_deploy: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/ # directory where steps will run
+    working_directory: ~/circlecidemo # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/node:8.12.0 # ...with this image as the primary container; this is where all `steps` will run
     steps: # a collection of executable commands
@@ -11,7 +11,7 @@ jobs: # a collection of steps
       - run:
           name: cloning repo
           command: cd ../ && git clone https://github.com/ravi-94/circlecidemo.git
-     - run:
+      - run:
           name: checkout master
           command: git checkout master
       - run:
