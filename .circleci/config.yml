@@ -6,6 +6,9 @@ jobs: # a collection of steps
       - image: circleci/node:8.12.0 # ...with this image as the primary container; this is where all `steps` will run
     steps: # a collection of executable commands
       - run:
+          name: checking directory
+          command: pwd
+      - run:
           name: checkout master
           command: git checkout master
       - run:
