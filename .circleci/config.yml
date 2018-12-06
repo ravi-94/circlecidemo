@@ -1,18 +1,34 @@
-version: 2.0
-
-jobs:
-  deploy:
-    machine:
-        enabled: true
-    working_directory: /home/tricon/circlecli/circlecidemo
-    steps:
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build_and_deploy: # runs not using Workflows must have a `build` job as entry point
+    working_directory: /home/tricon/circlecli/circlecidemo # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:8.12.0 # ...with this image as the primary container; this is where all `steps` will run
+    steps: # a collection of executable commands
       - run:
-          name: Deployment Master to Heroku
-          command: 
-            ./deploy.sh
-
+          name: checkout master
+          command: git checkout master
+      - run:
+          name: pulling latestcode
+          command: git pull # special step to check out source code to working directory
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: # building through ts lint
+          name: building 
+          command: npm run build
+      - run:
+          name: start server
+          command: npm run start
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - deploy
+      - build_and_deploy      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
