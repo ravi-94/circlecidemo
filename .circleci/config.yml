@@ -10,7 +10,7 @@ jobs: # a collection of steps
           command: pwd
       - run:
           name: checkout master
-          command: git checkout master
+          command: /usr/bin/git checkout master
       - run:
           name: pulling latestcode
           command: git pull # special step to check out source code to working directory
